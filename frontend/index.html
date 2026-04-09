@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Productivity Agent</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css?v=2"/>
+</head>
+<body>
+  <div class="app">
+
+    <header class="topbar">
+      <div class="topbar-left">
+        <div class="logo-mark">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <rect x="1" y="1" width="7" height="7" rx="2" fill="white" opacity="0.9"/>
+            <rect x="10" y="1" width="7" height="7" rx="2" fill="white" opacity="0.6"/>
+            <rect x="1" y="10" width="7" height="7" rx="2" fill="white" opacity="0.6"/>
+            <rect x="10" y="10" width="7" height="7" rx="2" fill="white" opacity="0.9"/>
+          </svg>
+        </div>
+        <div class="brand">
+          <span class="brand-name">Productivity Agent</span>
+          <span class="brand-sub">AI-powered planning</span>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="auth-shell">
+          <div class="auth-status" id="authStatus">
+            <div class="auth-avatar" id="authAvatar">G</div>
+            <div class="auth-copy">
+              <span class="auth-name" id="authName">Sign in required</span>
+              <span class="auth-email" id="authEmail">Use Google to access your private plan.</span>
+            </div>
+          </div>
+          <div id="googleSignInButton" class="google-signin-slot"></div>
+          <a id="calendarConnectBtn" class="topbar-btn" href="/auth/calendar/start" style="display:none">Connect Calendar</a>
+          <button id="logoutBtn" class="topbar-btn topbar-btn-secondary" type="button" style="display:none">Log out</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="workspace">
+
+      <!-- LEFT: Plan -->
+      <section class="plan-panel">
+        <div class="plan-header">
+          <div class="plan-header-title-group">
+            <h2 class="panel-title">Your Plan</h2>
+            <div class="state-display" id="stateDisplay" style="display:none">
+              <span class="state-badge" id="stateBadge">—</span>
+            </div>
+          </div>
+          <span class="panel-subtitle" id="planMeta">Waiting for your tasks...</span>
+        </div>
+
+        <div class="plan-content" id="planContent">
+          <div class="empty-state">
+            <div class="empty-icon">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                <rect x="8" y="8" width="32" height="32" rx="8" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 3"/>
+                <path d="M16 24h16M24 16v16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <p class="empty-title">No plan yet</p>
+            <p class="empty-desc">Send your tasks in the chat and your AI-powered schedule will appear here.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT: Chat -->
+      <section class="chat-panel">
+        <div class="chat-header">
+          <h2 class="panel-title">Chat</h2>
+          <span class="panel-subtitle">Tell me what you need to plan</span>
+        </div>
+
+        <div class="chat-messages" id="chatMessages">
+          <div class="msg agent">
+            <div class="msg-avatar">AI</div>
+            <div class="msg-bubble">
+              Hello! I'm your AI productivity assistant. Describe your tasks with priority, difficulty, and deadlines and I'll build you a smart plan.
+              <div class="msg-hint">e.g. "Finish report (high, hard, due tomorrow), review emails (medium, easy)"</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="chat-input-area">
+          <div class="auth-banner" id="authBanner">
+            Sign in with Google to start planning and keep each user's history private.
+          </div>
+          <div class="input-controls">
+            <div class="control-group">
+              <label class="control-label">
+                Energy level (Optional Override)
+                <span class="control-hint" title="Tells the system how you're feeling — affects how tasks are scheduled and how many are assigned per day">?</span>
+              </label>
+              <select id="energyInput" class="control-select">
+                <option value="">Let AI infer from chat history</option>
+                <option value="high">High - feeling great</option>
+                <option value="medium">Medium - doing okay</option>
+                <option value="low">Low - tired / low energy</option>
+              </select>
+            </div>
+          </div>
+          <div class="input-row">
+            <textarea
+              id="userInput"
+              class="chat-textarea"
+              placeholder="Sign in with Google to begin"
+              rows="2"
+              disabled
+            ></textarea>
+            <button class="send-btn" id="sendBtn" type="button" disabled>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M14 8L2 2l3 6-3 6 12-6z" fill="currentColor"/>
+              </svg>
+            </button>
+          </div>
+          <div class="input-footer">
+            <span class="input-tip">Press <kbd>Ctrl+Enter</kbd> to send</span>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="/static/secure_app.js?v=1"></script>
+</body>
+</html>

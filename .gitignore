@@ -1,0 +1,16 @@
+venv/
+__pycache__/
+*.pyc
+token.json
+credentials.json
+.env
+__pycache__/
+*.pyc
+.env
+*.env.local
+*_b64.txt
+token*.txt
+credentials*.txt
+*.pem
+*.key
+.pycache_verify/
